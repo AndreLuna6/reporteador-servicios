@@ -20,101 +20,133 @@ if (isset($_GET['buscar'])) {
     $resultado = $conexion->query($sql);
 
 }
+include("includes/header.php");
+include("includes/menu.php");
 ?>
 
-<!DOCTYPE html>
-<html>
+<div class="main-content">
 
-<head>
-    <title>Clientes registrados</title>
-</head>
+    <div class="container-fluid">
 
-<body>
+        <h3>Clientes registrados</h3>
 
-    <h2>Lista de clientes</h2>
+        <br>
 
-    <form method="GET" action="ver_cliente.php">
+        <form method="GET" action="ver_cliente.php" class="form-inline">
 
-        Buscar cliente:
-        <input type="text" name="buscar">
+            <div class="form-group">
 
-        <button type="submit">Buscar</button>
+                <input type="text" name="buscar" class="form-control" placeholder="Buscar cliente o empresa"
+                    value="<?php echo $buscar; ?>">
 
-    </form>
+            </div>
 
-    <br>
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-search"></i> Buscar
+            </button>
 
-    <?php
-    if ($resultado) {
-        ?>
+            <a href="ver_cliente.php" class="btn btn-default">
+                <i class="fa fa-refresh"></i> Mostrar todos
+            </a>
 
-        <table border="1">
+        </form>
 
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Empresa</th>
-                <th>Teléfono</th>
-                <th>Correo</th>
-                <th>Status</th>
-                <th>Acciones</th>
-            </tr>
+        <br><br>
 
-            <?php while ($fila = $resultado->fetch_assoc()) { ?>
+        <div class="table-responsive">
 
-                <tr>
+            <table class="table table-bordered table-hover">
 
-                    <td><?php echo $fila['id_cliente']; ?></td>
-                    <td><?php echo $fila['nombre']; ?></td>
-                    <td><?php echo $fila['empresa']; ?></td>
-                    <td><?php echo $fila['telefono']; ?></td>
-                    <td><?php echo $fila['correo']; ?></td>
-                    <td><?php echo $fila['estatus']; ?></td>
+                <thead>
 
-                    <td>
+                    <tr>
 
-                        <a href="editar_cliente.php?id=<?php echo $fila['id_cliente']; ?>">Editar</a>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Empresa</th>
+                        <th>Teléfono</th>
+                        <th>Correo</th>
+                        <th>Status</th>
+                        <th>Acciones</th>
 
-                        |
+                    </tr>
 
-                        <?php
-                        if ($fila['estatus'] == 'activo') {
-                            ?>
+                </thead>
 
-                            <a href="desactivar_cliente.php?id=<?php echo $fila['id_cliente']; ?>">
-                                Desactivar
-                            </a>
+                <tbody>
 
-                            <?php
-                        } else {
-                            ?>
+                    <?php while ($fila = $resultado->fetch_assoc()) { ?>
 
-                            <a href="activar_cliente.php?id=<?php echo $fila['id_cliente']; ?>">
-                                Activar
-                            </a>
+                        <tr>
 
-                            <?php
-                        }
-                        ?>
+                            <td><?php echo $fila['id_cliente']; ?></td>
+                            <td><?php echo $fila['nombre']; ?></td>
+                            <td><?php echo $fila['empresa']; ?></td>
+                            <td><?php echo $fila['telefono']; ?></td>
+                            <td><?php echo $fila['correo']; ?></td>
+                            <td>
 
-                    </td>
+                                <?php if ($fila['estatus'] == "activo") { ?>
 
-                </tr>
+                                    <span class="label label-success">Activo</span>
 
-            <?php } ?>
+                                <?php } else { ?>
 
-        </table>
+                                    <span class="label label-danger">Inactivo</span>
 
-        <?php
-    }
-    ?>
+                                <?php } ?>
 
-    <br>
+                            </td>
 
-    <a href="clientes.php">Registrar nuevo cliente</a>
-    <br><br>
-    <a href="index.php">Regresar a la pagina principal</a>
+                            <td>
 
-</body>
+                                <a href="editar_cliente.php?id=<?php echo $fila['id_cliente']; ?>"
+                                    class="btn btn-warning btn-sm">
 
-</html>
+                                    <i class="fa fa-edit"></i>
+
+                                </a>
+
+                                <?php if ($fila['estatus'] == "activo") { ?>
+
+                                    <a href="desactivar_cliente.php?id=<?php echo $fila['id_cliente']; ?>"
+                                        class="btn btn-danger btn-sm">
+
+                                        <i class="fa fa-times"></i>
+
+                                    </a>
+
+                                <?php } else { ?>
+
+                                    <a href="activar_cliente.php?id=<?php echo $fila['id_cliente']; ?>"
+                                        class="btn btn-success btn-sm">
+
+                                        <i class="fa fa-check"></i>
+
+                                    </a>
+
+                                <?php } ?>
+
+                            </td>
+
+                        </tr>
+
+                    <?php } ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <br>
+
+        <a href="clientes.php" class="btn btn-primary">
+            <i class="fa fa-user-plus"></i> Registrar nuevo cliente
+        </a>
+
+    </div>
+
+</div>
+
+<?php include("includes/footer.php"); ?>

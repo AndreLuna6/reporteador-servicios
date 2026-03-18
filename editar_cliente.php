@@ -6,50 +6,47 @@ $id = $_GET['id'];
 $sql = "SELECT * FROM clientes WHERE id_cliente = $id";
 $resultado = $conexion->query($sql);
 $cliente = $resultado->fetch_assoc();
+
+include("includes/header.php");
+include("includes/menu.php");
 ?>
 
-<!DOCTYPE html>
-<html>
+<div class="main-content">
+    <div class="container-fluid">
 
-<head>
-<title>Editar cliente</title>
-</head>
+        <h3>Editar cliente</h3>
 
-<body>
+        <form action="actualizar_cliente.php" method="POST">
 
-<h2>Editar cliente</h2>
+            <input type="hidden" name="id_cliente" value="<?php echo $cliente['id_cliente']; ?>">
 
-<form method="POST" action="actualizar_cliente.php">
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" class="form-control" value="<?php echo $cliente['nombre']; ?>">
+            </div>
 
-<input type="hidden" name="id_cliente" value="<?php echo $cliente['id_cliente']; ?>">
+            <div class="form-group">
+                <label>Empresa</label>
+                <input type="text" name="empresa" class="form-control" value="<?php echo $cliente['empresa']; ?>">
+            </div>
 
-Nombre:
-<br>
-<input type="text" name="nombre" value="<?php echo $cliente['nombre']; ?>">
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" name="telefono" class="form-control" value="<?php echo $cliente['telefono']; ?>">
+            </div>
 
-<br><br>
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="correo" class="form-control" value="<?php echo $cliente['correo']; ?>">
+            </div>
 
-Empresa:
-<br>
-<input type="text" name="empresa" value="<?php echo $cliente['empresa']; ?>">
+            <button type="submit" class="btn btn-warning">
+                <i class="fa fa-save"></i> Actualizar cliente
+            </button>
 
-<br><br>
+        </form>
 
-Teléfono:
-<br>
-<input type="text" name="telefono" value="<?php echo $cliente['telefono']; ?>">
+    </div>
+</div>
 
-<br><br>
-
-Correo:
-<br>
-<input type="email" name="correo" value="<?php echo $cliente['correo']; ?>">
-
-<br><br>
-
-<button type="submit">Actualizar</button>
-
-</form>
-
-</body>
-</html>
+<?php include("includes/footer.php"); ?>

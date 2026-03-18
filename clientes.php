@@ -2,55 +2,51 @@
 session_start();
 include "conexion.php";
 
-if(!isset($_SESSION['tecnico'])){
+if (!isset($_SESSION['tecnico'])) {
     header("Location: login.php");
 }
+include("includes/header.php");
+include("includes/menu.php");
 ?>
 
-<!DOCTYPE html>
-<html>
+<div class="main-content">
+    <div class="container-fluid">
 
-<head>
-<title>Registrar cliente</title>
-</head>
+        <h3>Registrar cliente</h3>
 
-<body>
+        <form action="guardar_cliente.php" method="POST">
 
-<h2>Registrar cliente</h2>
+            <div class="form-group">
+                <label>Nombre</label>
+                <input type="text" name="nombre" class="form-control" required>
+            </div>
 
-<form method="POST" action="guardar_cliente.php">
+            <div class="form-group">
+                <label>Empresa</label>
+                <input type="text" name="empresa" class="form-control">
+            </div>
 
-Nombre:
-<br>
-<input type="text" name="nombre" required>
+            <div class="form-group">
+                <label>Teléfono</label>
+                <input type="text" name="telefono" class="form-control">
+            </div>
 
-<br><br>
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="correo" class="form-control">
+            </div>
 
-Empresa:
-<br>
-<input type="text" name="empresa">
+            <button type="submit" class="btn btn-primary">
+                <i class="fa fa-save"></i> Guardar cliente
+            </button>
 
-<br><br>
+            <a href="ver_cliente.php" class="btn btn-default">
+                <i class="fa fa-arrow-left"></i> Volver
+            </a>
 
-Teléfono:
-<br>
-<input type="text" name="telefono">
+        </form>
 
-<br><br>
+    </div>
+</div>
 
-Correo:
-<br>
-<input type="email" name="correo">
-
-<br><br>
-
-<button type="submit">Guardar cliente</button>
-
-</form>
-
-<br><br>
-
-<a href="index.php">Volver al dashboard</a>
-
-</body>
-</html>
+<?php include("includes/footer.php"); ?>
