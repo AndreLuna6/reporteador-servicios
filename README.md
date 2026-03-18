@@ -1,21 +1,37 @@
-# Sistema de Reporte de Servicios
+# 🛠️ Sistema de Gestión de Servicios
 
-Sistema web desarrollado en PHP y MySQL para la gestión de servicios técnicos.
+Sistema web desarrollado en PHP para la administración de servicios técnicos, clientes y seguimiento de estatus.
 
-## Funcionalidades
+---
 
-- Login de técnicos
-- Registro de clientes
-- Edición de clientes
-- Activación / desactivación de clientes
-- Búsqueda de clientes
+## 🚀 Funcionalidades
 
-## Tecnologías
+- 🔐 Inicio de sesión de técnicos
+- 👥 Gestión de clientes (CRUD)
+- 🧰 Registro y seguimiento de servicios
+- 📊 Dashboard con gráfica de estatus
+- 🟡 Pendiente / 🔵 En proceso / 🟢 Finalizado
+- 📄 Generación de reportes en PDF
+- 📋 Historial de servicios
+
+---
+
+## 🖥️ Tecnologías utilizadas
 
 - PHP
 - MySQL
-- HTML
+- Bootstrap 3
+- Chart.js
+- FPDF
 
-## Autor
+---
 
-Andre Luna
+## ⚙️ Instalación
+
+1. Clonar repositorio:
+```bash
+git clone https://github.com/AndreLuna6/reporteador-servicios.git
+```
+## 👨‍💻 Autor
+
+I.S.C. André E. Luna González
